@@ -29,15 +29,22 @@ public class Day13{
 			}
 			j++;
 		}
-		long ans=0;
-		long M=1;
-		for(int cur:list) {
-			M*=cur;
-		}
-		long[] a=new long[list.size()],e=new long[list.size()],m=new long[list.size()];
+		long[] a=new long[list.size()],m=new long[list.size()];
 		for(int i=0;i<list.size();i++) {
 			a[i]=(list.get(i)-times.get(i))%list.get(i);
 			m[i]=list.get(i);
+		}
+		return CRT(a,m);
+	}
+	
+	//applies the Chinese Remainder Theorem for coprime m[i]'s
+	static long CRT(long[] a,long[] m) {
+		long M=1;
+		long ans=0;
+		for(long l:m) {
+			M*=l;
+		}
+		for(int i=0;i<m.length;i++) {
 			long Mi=M/m[i];
 			ans+=a[i]*(recInv(m[i],Mi)[2]+m[i])*Mi;
 		}
