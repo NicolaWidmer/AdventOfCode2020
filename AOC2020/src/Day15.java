@@ -17,6 +17,33 @@ public class Day15{
 			sc=new Scanner(System.in);
 		}
 		int ans=0;
-		return ans;
+		List<Integer> nums=new ArrayList<Integer>();
+		while(sc.hasNext()) {
+			nums.add(sc.nextInt());
+		}
+		
+		int steps=0;
+		int last=0;
+		int numOfSteps=30000000;
+		
+		Map<Integer,Integer> lastIndex=new HashMap<Integer,Integer>();
+		
+		for(;steps<nums.size();steps++) {
+			lastIndex.put(last, steps-1);
+			last=nums.get(steps);
+		}
+		for(;steps<numOfSteps;steps++) {
+			
+			Integer ind=lastIndex.get(last);
+			lastIndex.put(last, steps-1);
+			
+			int next=0;
+			
+			if(ind==null)next=0;
+			else next=steps-1-ind;
+			
+			last=next;
+		}
+		return last;
 	}
 } 
