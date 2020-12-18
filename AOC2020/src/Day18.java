@@ -24,8 +24,10 @@ public class Day18{
 	}
 	
 	public static long evalExpr(myScan s) {
+		
 		List<Long> nums=new ArrayList<Long>();
 		List<Character> ops=new ArrayList<Character>();
+		
 		nums.add(evalTerm(s));
 		while(s.hasNextOp()) {
 			ops.add(s.nextOp());
